@@ -1,0 +1,35 @@
+.modal {
+    position: absolute;
+    background: aliceblue;
+    border: 1px solid cornflowerblue;
+    width: auto;
+    left: 20%;
+    right: 20%;
+    top: 130px;
+}
+
+.modal>h2 {
+    background: cornflowerblue;
+    color: white;
+    padding: 10px;
+}
+
+.modalBody {
+    padding: 10px;
+    min-height: 50px;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.modalFooter {
+    text-align: right;
+    padding: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    display: inline-block;
+    padding: 0 5px;
+    cursor: pointer;
+}

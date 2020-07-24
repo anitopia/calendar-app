@@ -1,0 +1,26 @@
+.day {
+    height: 100px;
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid cornflowerblue;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.gray {
+    color: gray;
+    background-color: rgb(206, 206, 206);
+}
+
+.meetingLine {
+    font-size: 13px;
+    margin: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.today {
+    border: 1px solid cornflowerblue;
+    background-color: aliceblue;
+}

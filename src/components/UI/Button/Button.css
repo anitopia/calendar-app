@@ -1,0 +1,18 @@
+.btnMonth{
+    align-self: center;
+    font-family: monospace;
+    font-size: 60px;
+    cursor: pointer;
+  }
+  
+  .btnMonth:hover{
+    color: aliceblue;
+    font-size: 62px;
+  }
+  
+  .menuBtnMonth {
+    font-family: monospace;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+  }
