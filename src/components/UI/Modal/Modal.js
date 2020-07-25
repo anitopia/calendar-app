@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Modal.css';
 
-const Modal = (props) => (
+const Modal = (props) => <>
   <div className='modal'>
-    <h2>{props.header}
+    <h2>
+      <div>{props.header}</div>
       <span className="close" onClick={props.close}>X</span>
     </h2>
     <div className='modalBody'>{props.children}</div>
@@ -12,7 +13,8 @@ const Modal = (props) => (
       <button onClick={props.footer} className='button'>{props.btnName}</button>
     </div>}
   </div>
-);
+  <div className='backdrop' onClick={props.close}/>
+</>;
 
 Modal.propTypes = {
   header: PropTypes.string,

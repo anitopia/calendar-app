@@ -5,20 +5,31 @@
     width: auto;
     left: 20%;
     right: 20%;
-    top: 130px;
+    top: 10%;
+    z-index: 10;
 }
 
 .modal>h2 {
     background: cornflowerblue;
     color: white;
-    padding: 10px;
+    padding: 15px 45px 15px 15px;
+}
+
+.modal>h2>div {
+    display: inline-block;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    display: inline-block;
+    padding: 0 5px;
+    cursor: pointer;
 }
 
 .modalBody {
     padding: 10px;
-    min-height: 50px;
-    max-height: 250px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .modalFooter {
@@ -26,10 +37,12 @@
     padding: 10px;
 }
 
-.close {
-    position: absolute;
-    right: 10px;
-    display: inline-block;
-    padding: 0 5px;
-    cursor: pointer;
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    background: #00000080;
+    height: 100%;
+    top: 0;
+    z-index: 1;
 }

@@ -1,13 +1,26 @@
 .meetingForm>label{
 
-    display: block;
+    display: inline-block;
+    width: 100%;
     padding: 10px;
+    box-sizing: border-box;
+}
+.meetingForm>label.half{
+    width: 50%;
 }
 .meetingForm input,
 .meetingForm select{
     margin: 0 10px;
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: white;
+    box-sizing: border-box;
 }
-
+.meetingForm input[type='submit']{
+    background: cornflowerblue;
+}
 .formFooter {
     text-align: right;
     padding: 10px;
