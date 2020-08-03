@@ -1,4 +1,5 @@
 const initialState = {
+    meetingRooms:[],
     meetings: [],
     date: {
         day: new Date().getDate(),
@@ -25,7 +26,15 @@ export function rootReducer(state = initialState, action) {
                     action.data
                 ]
             }
-
+        case 'ADD_MEETING_ROOMS':
+            return {
+                ...state,
+                meetingRooms: [
+                    ...state.meetingRooms,
+                    ...action.data
+                ]
+            }
+    
         case 'REMOVE_MEETING':
             return {
                 ...state,
@@ -58,6 +67,14 @@ export function rootReducer(state = initialState, action) {
                 date: {
                     ...state.date,
                     month: state.date.month - 1
+                }
+            }
+        case 'SET_YEAR':
+            return {
+                ...state,
+                date: {
+                    ...state.date,
+                    year: action.data
                 }
             }
         default:

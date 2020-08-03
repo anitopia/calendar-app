@@ -1,13 +1,12 @@
 import React from 'react';
 import Day from '../Day';
-import { isToday, compareDates } from '../../helper';
-import { useSelector, shallowEqual } from 'react-redux';
+import { isToday } from '../../helper';
+import { useSelector } from 'react-redux';
 
 import './Days.css';
 
 const Days = () => {
 
-  const meetings = useSelector(state => state.meetings,shallowEqual)
   const date = useSelector(state => state.date);
 
   // Days creation
@@ -31,15 +30,12 @@ const Days = () => {
       monthTemp = date.month + 1;
     }
 
-    const dayMeetArr = meetings.filter(m => compareDates(new Date(m.start), new Date(date.year, monthTemp, day), new Date(date.year, monthTemp, day + 1)));
-    const dayMeetSorted = dayMeetArr.sort((a, b) => (a.start < b.start ? -1 : a.start > b.start ? 1 : 0));
     arr.push(<Day
       day={day}
       month={monthTemp}
       active={i > firstDay && i <= monthDays + firstDay}
       key={i}
       today={isToday(date.year, monthTemp, day)}
-      meetings={dayMeetSorted}
     />);
   }
  

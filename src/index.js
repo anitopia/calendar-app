@@ -14,6 +14,7 @@ fetch('/meetings.json')
   .then(
     (res) => {
       store.dispatch({ type: 'ADD_MEETINGS', data: res.meetings });
+      store.dispatch({ type: 'ADD_MEETING_ROOMS', data: res.meetingRooms });
     }
   )
 ReactDOM.render(

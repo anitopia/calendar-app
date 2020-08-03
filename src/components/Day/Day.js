@@ -2,25 +2,26 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Day.css';
-import { getTime } from '../../helper';
 
 import Modal from '../UI/Modal';
 import Meeting from '../Meeting';
 import MeetingForm from '../MeetingForm';
-import { monthsText, addZero } from '../../helper';
+import { monthsText, addZero, getTime, compareDates } from '../../helper';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 
-const Day = ({ day,month, active, meetings, today }) => {
-  const [dayMeetings, setDayMeetings] = useState([]);
+const Day = ({ day, month, active, today }) => {
   const [modalF, setModalF] = useState(false);
   const [createMeetingF, setCreateMeetingF] = useState(false);
+  const meetings = useSelector(state => state.meetings);
   const date = useSelector(state => state.date);
   const dispatch = useDispatch();
 
+  const dayMeetings = meetings.filter(m => compareDates(new Date(m.start), new Date(date.year, month, day), new Date(date.year, month, day + 1)));
+  const dayMeetSorted = dayMeetings.sort((a, b) => (a.start < b.start ? -1 : a.start > b.start ? 1 : 0));
+
   const deleteMeeting = (m) => {
-    setDayMeetings(dayMeetings.filter(dm => dm.start !== m.start || dm.meetingRoom !== m.meetingRoom));
     dispatch({ type: 'REMOVE_MEETING', data: m });
   }
 
@@ -36,25 +37,20 @@ const Day = ({ day,month, active, meetings, today }) => {
       participants: []
     }
     dispatch({ type: 'ADD_MEETING', data: data });
-    const dayMeetSorted = meetings.length > 0 ?
-      [...meetings, data].sort((a, b) => (a.start < b.start ? -1 : a.start > b.start ? 1 : 0)) :
-      [data];
-    setDayMeetings(dayMeetSorted);
     setCreateMeetingF(false);
   }
-
   return <>
     <div className={'day' + (!active ? ' gray' : '') + (today ? ' today' : '')} onClick={() => setModalF(true)}>
       <div>{day}</div>
-      {meetings && meetings.slice(0, 3).map((m, i) => (
+      {dayMeetSorted && dayMeetSorted.slice(0, 3).map((m, i) => (
         <div className='meetingLine' key={i}>{getTime(m.start) + '-' + getTime(m.end) + ' ' + m.name}</div>
       ))}
     </div>
     {modalF && !createMeetingF &&
       <Modal header={day + ' ' + monthsText[month] + ' ' + date.year} close={() => setModalF(false)} showFooter btnName='Add new meeting' footer={() => (setCreateMeetingF(true))}>
-        {meetings.length === 0 ?
+        {dayMeetSorted.length === 0 ?
           <div>No meetings</div> :
-          meetings.map((m, i) => <Meeting key={i} m={m}
+          dayMeetSorted.map((m, i) => <Meeting key={i} m={m}
             remove={() => deleteMeeting(m)}
           ></Meeting>)
         }
@@ -62,7 +58,7 @@ const Day = ({ day,month, active, meetings, today }) => {
 
     {createMeetingF &&
       <Modal header={'Create meeting for ' + day + ' ' + monthsText[month] + ' ' + date.year} close={() => { setModalF(false); setCreateMeetingF(false) }}>
-        <MeetingForm handleSubmit={(e) => createMeeting(e)} meetings={meetings}></MeetingForm>
+        <MeetingForm handleSubmit={(e) => createMeeting(e)} meetings={dayMeetSorted}></MeetingForm>
       </Modal>}</>
     ;
 };

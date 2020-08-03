@@ -2,7 +2,9 @@
     align-self: center;
     font-family: monospace;
     font-size: 60px;
-    cursor: pointer;
+    cursor: pointer;    
+    display: inline-block;
+    padding: 15px;
   }
   
   .btnMonth:hover{

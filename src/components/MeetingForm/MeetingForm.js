@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { getTime } from '../../helper';
 import './MeetingForm.css';
 
 const MeetingForm = ({ handleSubmit, meetings }) => {
 
   const [errorText, setErrorText] = useState();
-  const [formData, setFormData] = useState({ start: '10:00', end: '11:00', meetingRoom: 'Tsarevets' });
+  const [formData, setFormData] = useState({ start: '', end: '', meetingRoom: 'Tsarevets' });
+  const rooms = useSelector(state => state.meetingRooms);
+
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -32,7 +35,6 @@ const MeetingForm = ({ handleSubmit, meetings }) => {
       <label className="half">
         From:
         <input type='time' name='start' min='07:00' max='19:00' value={formData.start} required onChange={(e) => changeHandler(e)} />
-
       </label>
       <label className="half">
         To:
@@ -41,8 +43,7 @@ const MeetingForm = ({ handleSubmit, meetings }) => {
       <label>
         Meeting Room
       <select name='meetingRoom' value={formData.meetingRoom} onChange={(e) => changeHandler(e)}>
-          <option value='Tsarevets'>Tsarevets</option>
-          <option value='Arbanasi'>Arbanasi</option>
+          {rooms && rooms.map(r => <option value={r} key={r}>{r}</option>)}
         </select>
       </label>
       <br />

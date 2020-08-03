@@ -10,17 +10,18 @@
 
 .gray {
     color: gray;
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(229,226,226);
 }
 
 .meetingLine {
     font-size: 13px;
-    margin: 4px;
+    padding: 0 4px;
+    margin: 4px 0;
     overflow: hidden;
+    border-left: 4px solid cornflowerblue;
     white-space: nowrap;
 }
 
 .today {
-    border: 1px solid cornflowerblue;
-    background-color: aliceblue;
+    border: 3px solid cornflowerblue;
 }
